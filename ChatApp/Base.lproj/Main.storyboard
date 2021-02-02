@@ -30,6 +30,9 @@
                                             <constraint firstAttribute="width" constant="50" id="hNv-Ep-Ihd"/>
                                         </constraints>
                                         <state key="normal" image="paperplane" catalog="system"/>
+                                        <connections>
+                                            <action selector="sendBtnPressed:" destination="8rO-uj-cpc" eventType="touchUpInside" id="1wW-RB-N6X"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -40,7 +43,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="116" id="y6R-1Z-vj2" customClass="ChatMessageCell" customModule="ChatApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatBubble" rowHeight="116" id="y6R-1Z-vj2" customClass="ChatMessageCell" customModule="ChatApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y6R-1Z-vj2" id="zkA-PO-RCt">
@@ -63,9 +66,11 @@
                                             <constraints>
                                                 <constraint firstItem="d0R-R3-Wx2" firstAttribute="top" secondItem="pz3-6V-1b3" secondAttribute="bottom" constant="22.5" id="FQX-hq-5Mx"/>
                                                 <constraint firstItem="pz3-6V-1b3" firstAttribute="leading" secondItem="zkA-PO-RCt" secondAttribute="leading" constant="20" id="bd1-1C-2er"/>
+                                                <constraint firstAttribute="bottom" secondItem="d0R-R3-Wx2" secondAttribute="bottom" constant="31.5" id="bk7-8d-dHv"/>
                                                 <constraint firstItem="pz3-6V-1b3" firstAttribute="top" secondItem="zkA-PO-RCt" secondAttribute="top" constant="21" id="eeu-bH-2Bq"/>
                                                 <constraint firstItem="d0R-R3-Wx2" firstAttribute="leading" secondItem="zkA-PO-RCt" secondAttribute="leading" constant="20" symbolic="YES" id="fzJ-74-eG9"/>
                                                 <constraint firstAttribute="trailing" secondItem="pz3-6V-1b3" secondAttribute="trailing" constant="20" id="sfT-hl-TdJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="pz3-6V-1b3" secondAttribute="bottom" constant="74.5" id="wt3-Ai-Rlc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -91,12 +96,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="kxB-Qq-sFH"/>
                     <connections>
-                        <outlet property="tableView" destination="H4b-Zn-yAh" id="Pig-0O-uXY"/>
+                        <outlet property="sendTextField" destination="xpH-De-O32" id="jEm-4F-oJX"/>
+                        <outlet property="tableView" destination="H4b-Zn-yAh" id="mft-99-Te6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IkE-kv-y2e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-806" y="-401"/>
+            <point key="canvasLocation" x="-899" y="-419"/>
         </scene>
         <!--Chat List View Controller-->
         <scene sceneID="Fgu-Ja-Z8h">

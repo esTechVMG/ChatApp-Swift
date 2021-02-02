@@ -23,15 +23,13 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
             
         }
     }
-    func readFromUserDefaults() -> Bool {
+    func readFromUserDefaults() {
         do {
             let data = defaults.data(forKey: "ChatList")
             let newDefaults:UserList = try decoder.decode(UserList.self, from: data ?? Data())
             userList = newDefaults
-            return true
         } catch {
             print("Unable to Decode (\(error))")
-            return false
         }
     }
     
@@ -51,9 +49,7 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController:ChatViewController = storyboard.instantiateViewController(identifier: "ChatView") as! ChatViewController
-        
-        
-        
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

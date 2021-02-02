@@ -11,7 +11,7 @@
         <!--Chat View Controller-->
         <scene sceneID="rul-Eo-ehw">
             <objects>
-                <viewController id="8rO-uj-cpc" customClass="ChatViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatView" id="8rO-uj-cpc" customClass="ChatViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lyn-6e-KJb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,7 +37,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H4b-Zn-yAh">
-                                <rect key="frame" x="0.0" y="88" width="414" height="724"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="116" id="y6R-1Z-vj2" customClass="ChatMessageCell" customModule="ChatApp" customModuleProvider="target">
@@ -96,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IkE-kv-y2e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-913" y="-410"/>
+            <point key="canvasLocation" x="-806" y="-401"/>
         </scene>
         <!--Chat List View Controller-->
         <scene sceneID="Fgu-Ja-Z8h">
@@ -131,7 +131,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="id" destination="VNe-eI-faH" id="HOb-tY-cY3"/>
-                                            <segue destination="8rO-uj-cpc" kind="show" id="Y6a-hC-TqE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

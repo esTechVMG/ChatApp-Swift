@@ -49,6 +49,10 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController:ChatViewController = storyboard.instantiateViewController(identifier: "ChatView") as! ChatViewController
+        
+        
         
     }
     

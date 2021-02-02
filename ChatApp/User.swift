@@ -20,3 +20,12 @@ struct UserList:Codable {
         users=Array()
     }
 }
+struct UserMessage {
+    var author:String = "No Author"
+    var message:String = "Hello World"
+    var isMessageMine:Bool = true
+}
+struct  UserMessageList{
+    var messageList:[UserMessage]
+}
+

@@ -8,12 +8,21 @@
 import UIKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.registerForPushNotifications()
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        let notificationOption = launchOptions?[.remoteNotification]
+        if let notification = notificationOption as? [String: AnyObject],
+           let aps = notification["aps"] as? [String:AnyObject]{
+            print("Titulo de la notificacion: \(aps["category"] as! String)")
+        }
         return true
     }
 
@@ -30,7 +39,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
+    
+    func registerForPushNotifications() -> Void {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: {(granted:Bool,error:Error?) -> Void in
+            print("Permission Granted: \(granted)")
+            guard granted else {return}
+            //Acciones personalizadas
+            let acceptAction = UNNotificationAction(identifier: "ACCEPT_ACTION", title: "Aceptar", options: [.foreground])
+            let denyAction = UNNotificationAction(identifier: "DENY_ACTION", title: "Denegar", options: [.foreground])
+            //Tipo de notificaciones
+            let notifCategory = UNNotificationCategory(identifier: "TEST_PUSH", actions: [acceptAction,denyAction], intentIdentifiers: [], options: .customDismissAction)
+            
+            let notificationCenter = UNUserNotificationCenter.current()
+            notificationCenter.setNotificationCategories([notifCategory])
+            
+            self.getNotificationSettings()
+            UNUserNotificationCenter.current().delegate = self
+        })
+    }
+    
+    func getNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings(completionHandler: {settings in
+            print("Configuracion Push: \(settings)")
+            guard settings.authorizationStatus == .authorized else {return}
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        })
+    }
+    //Completed registering to APNS
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map({data in String(format: "%02.2hh%", data)
+        })
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")
+    }
+    //Error while registering to APNS
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Fallo al registrar: \(error)")
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        //let username = userInfo["username"] as! String
+        if let aps = userInfo["aps"] as? [String: AnyObject]{
+            /*
+             This works in the simulator
+             print(aps)
+             */
+            
+            switch response.actionIdentifier {
+            case "ACCEPT_ACTION":
+                print("El usuario ha aceptado")
+                break
+            case "DENY_ACTION":
+                print("El usuario ha denegado")
+                break
+            default:
+               print("Abierta la notificacion sin click")
+            }
+        }
+    }
 }
 

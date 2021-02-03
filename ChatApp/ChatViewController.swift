@@ -11,7 +11,6 @@ class ChatViewController : UIViewController, UITableViewDelegate, UITableViewDat
             addMessage(message: UserMessage(author: "OtherPerson", message: "Hello"))
         }
     }
-    var userToken:String = "abcdefghijklmn"
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
     var defaults = UserDefaults.standard
@@ -19,7 +18,7 @@ class ChatViewController : UIViewController, UITableViewDelegate, UITableViewDat
         do {
             let data = try encoder.encode(messageList)
             // Write/Set Data
-            defaults.set(data, forKey: userToken)
+            defaults.set(data, forKey: user.token)
             
         } catch {
             print("Unable to Encode (\(error))")
@@ -29,7 +28,7 @@ class ChatViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     func readFromUserDefaults() {
         do {
-            let data = defaults.data(forKey: userToken)
+            let data = defaults.data(forKey: user.token)
             let newDefaults:UserMessageList = try decoder.decode(UserMessageList.self, from: data ?? Data())
             messageList = newDefaults
         } catch {
@@ -39,7 +38,8 @@ class ChatViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     
     var messageList:UserMessageList = UserMessageList()
-    
+    var user:User = User(name: "Unknown User", token: "jit6yji77noyhu6t")
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var sendTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -47,18 +47,21 @@ class ChatViewController : UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.reloadData()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        readFromUserDefaults()
+        if ((user.name?.isEmpty) != nil){
+            userNameLabel.text = user.name
+        }else{
+            userNameLabel.text = user.token
+        }
         
+        tableView.reloadData()
+        readFromUserDefaults()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         let index = IndexPath(row: messageList.messageList.count-1, section:0)
         if(index.row>=0){
             tableView.scrollToRow(at: index, at: .bottom, animated: false)
         }
-        
     }
     
     @IBAction func sendBtnPressed(_ sender: Any) {

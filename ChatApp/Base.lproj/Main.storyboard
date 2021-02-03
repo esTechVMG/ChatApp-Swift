@@ -40,7 +40,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H4b-Zn-yAh">
-                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
+                                <rect key="frame" x="0.0" y="93.5" width="414" height="718.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatBubbleOther" rowHeight="116" id="y6R-1Z-vj2" customClass="ChatMessageCell" customModule="ChatApp" customModuleProvider="target">
@@ -116,15 +116,24 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAg-Gr-kPN">
+                                <rect key="frame" x="20" y="59" width="374" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DPx-wD-ejX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="H4b-Zn-yAh" firstAttribute="top" secondItem="DPx-wD-ejX" secondAttribute="top" id="9NY-pl-Vn1"/>
+                            <constraint firstItem="WAg-Gr-kPN" firstAttribute="leading" secondItem="DPx-wD-ejX" secondAttribute="leading" constant="20" id="2aT-x7-4eT"/>
+                            <constraint firstItem="WAg-Gr-kPN" firstAttribute="top" secondItem="DPx-wD-ejX" secondAttribute="top" constant="15" id="7m9-8n-XX0"/>
+                            <constraint firstItem="H4b-Zn-yAh" firstAttribute="top" secondItem="WAg-Gr-kPN" secondAttribute="bottom" constant="14" id="Bj2-cI-UhJ"/>
                             <constraint firstItem="A8d-V1-VY6" firstAttribute="top" secondItem="H4b-Zn-yAh" secondAttribute="bottom" id="FKB-p5-0LF"/>
                             <constraint firstItem="H4b-Zn-yAh" firstAttribute="leading" secondItem="DPx-wD-ejX" secondAttribute="leading" id="GOa-NB-aei"/>
                             <constraint firstItem="DPx-wD-ejX" firstAttribute="trailing" secondItem="A8d-V1-VY6" secondAttribute="trailing" id="c9i-Um-F2M"/>
                             <constraint firstItem="DPx-wD-ejX" firstAttribute="trailing" secondItem="H4b-Zn-yAh" secondAttribute="trailing" id="fTa-jT-zCi"/>
+                            <constraint firstItem="DPx-wD-ejX" firstAttribute="trailing" secondItem="WAg-Gr-kPN" secondAttribute="trailing" constant="20" id="ffG-Yh-P9z"/>
                             <constraint firstItem="DPx-wD-ejX" firstAttribute="bottom" secondItem="A8d-V1-VY6" secondAttribute="bottom" id="hMQ-G2-uQP"/>
                             <constraint firstItem="A8d-V1-VY6" firstAttribute="leading" secondItem="DPx-wD-ejX" secondAttribute="leading" id="nyW-kj-UUJ"/>
                         </constraints>
@@ -134,6 +143,7 @@
                         <outlet property="sendButton" destination="uGF-WT-As8" id="5vM-Lq-0Vt"/>
                         <outlet property="sendTextField" destination="xpH-De-O32" id="jEm-4F-oJX"/>
                         <outlet property="tableView" destination="H4b-Zn-yAh" id="mft-99-Te6"/>
+                        <outlet property="userNameLabel" destination="WAg-Gr-kPN" id="ueQ-oc-DE1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IkE-kv-y2e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

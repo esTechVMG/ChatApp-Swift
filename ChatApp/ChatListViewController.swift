@@ -67,7 +67,34 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
     
     
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    func numberOfSections(in tableView: UITableView) -> Int {return 1}
+    
+    @IBAction func addButtonPressed(_ sender: Any) {
+        let alertController = UIAlertController(title: "Insert Token", message: nil, preferredStyle: .alert)
+        alertController.addTextField { (textField : UITextField) -> Void in
+            textField.placeholder = "Token"
+                }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
+            print("Cancel")
+                }
+        let okAction = UIAlertAction(title: "OK", style: .default) { (result : UIAlertAction) -> Void in
+            if let token:String = alertController.textFields?.first?.text{
+                print(token)
+                if token != ""{
+                    self.userList.users.append(User(name: nil, token: token))
+                    self.tableView.reloadData()
+                }else{
+                    let alertController2 = UIAlertController(title: "Error", message: "No ha introducido nada", preferredStyle: .alert)
+                    let okAlertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController2.addAction(okAlertAction)
+                    self.present(alertController2, animated: true, completion: nil)
+                }
+            }else{
+                
+            }
+        }
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
 }

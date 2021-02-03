@@ -20,7 +20,7 @@ struct UserList:Codable {
         users=Array()
     }
 }
-struct UserMessage {
+struct UserMessage:Codable {
     var author:String? = "UnknownUser"
     var message:String = "HelloWorld"
     var isMessageMine:Bool?
@@ -29,7 +29,7 @@ struct UserMessage {
         self.message = message
     }
 }
-struct  UserMessageList{
+struct  UserMessageList:Codable{
     var messageList:[UserMessage]
     init() {
         messageList=Array()

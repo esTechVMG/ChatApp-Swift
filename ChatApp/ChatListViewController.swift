@@ -17,7 +17,6 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
             let data = try encoder.encode(user)
             // Write/Set Data
             defaults.set(data, forKey: "ChatList")
-            
         } catch {
             print("Unable to Encode (\(error))")
             
@@ -49,6 +48,7 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController:ChatViewController = storyboard.instantiateViewController(identifier: "ChatView") as! ChatViewController
+        viewController.userToken = userList.users[indexPath.row].token
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -83,6 +83,7 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
                 if token != ""{
                     self.userList.users.append(User(name: nil, token: token))
                     self.tableView.reloadData()
+                    self.storeToChatList(user: self.userList)
                 }else{
                     let alertController2 = UIAlertController(title: "Error", message: "No ha introducido nada", preferredStyle: .alert)
                     let okAlertAction = UIAlertAction(title: "OK", style: .default, handler: nil)

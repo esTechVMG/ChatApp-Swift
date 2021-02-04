@@ -36,9 +36,6 @@ struct  UserMessageList:Codable{
     }
 }
 
-func apnObjectToUserMessageObject(apn:ApnObject) -> UserMessage {
-    return UserMessage(author: apn.username, message: apn.aps.alert.body)
-}
 
 /*
  APNS Message
@@ -54,13 +51,14 @@ func apnObjectToUserMessageObject(apn:ApnObject) -> UserMessage {
          "category": "TEST_PUSH"
      },
      "username": "Vicente"
+     "token": "ej84uhfg58"
  }
 
  */
 struct ApnObject {
     var aps:aps
     var username:String
-    var ismine:Bool
+    var token:String
 }
 struct aps {
     var alert:alert
@@ -72,4 +70,10 @@ struct aps {
 struct alert {
     var title:String
     var body:String
+}
+func apnObjectToUserMessageObject(apn:ApnObject) -> UserMessage {
+    return UserMessage(author: apn.username, message: apn.aps.alert.body)
+}
+func apnObjectToUserObject(apn:ApnObject)-> User {
+    return User(name: apn.username, token: apn.token)
 }

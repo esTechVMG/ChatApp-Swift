@@ -10,7 +10,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
-
+    let jsonDecoder = JSONDecoder()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -19,10 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UIApplication.shared.applicationIconBadgeNumber = 0
         
         let notificationOption = launchOptions?[.remoteNotification]
-        if let notification = notificationOption as? [String: AnyObject],
-           let aps = notification["aps"] as? [String:AnyObject]{
-            print("Titulo de la notificacion: \(aps["category"] as! String)")
+        if let notification = notificationOption as? Data{
+
         }
+        
+        
         return true
     }
 
@@ -82,7 +83,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         //let username = userInfo["username"] as! String
-        if let aps = userInfo["aps"] as? [String: AnyObject]{
+        if (userInfo["aps"] as? [String: AnyObject]) != nil{
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: userInfo as Dictionary, options: .prettyPrinted)
+                let notification:ApnObject = try jsonDecoder.decode(ApnObject.self, from: jsonData)
+                print("Titulo de la notificacion: \(notification.aps.alert.title)")
+            } catch {
+                
+            }
+            
             /*
              This works in the simulator
              print(aps)

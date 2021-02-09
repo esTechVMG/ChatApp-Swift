@@ -55,19 +55,19 @@ struct  UserMessageList:Codable{
  }
 
  */
-struct ApnObject {
+struct ApnObject:Codable {
     var aps:aps
     var username:String
     var token:String
 }
-struct aps {
+struct aps:Codable{
     var alert:alert
     var sound:String
     var badge:Int
     var link_url:String
     var category:String
 }
-struct alert {
+struct alert:Codable{
     var title:String
     var body:String
 }

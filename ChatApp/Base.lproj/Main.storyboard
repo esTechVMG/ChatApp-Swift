@@ -53,13 +53,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum dolor sit amet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pz3-6V-1b3">
                                                     <rect key="frame" x="20" y="21" width="374" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0R-R3-Wx2">
                                                     <rect key="frame" x="20" y="64" width="51.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -73,6 +73,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="pz3-6V-1b3" secondAttribute="bottom" constant="74.5" id="wt3-Ai-Rlc"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                         <connections>
                                             <outlet property="authorLabel" destination="d0R-R3-Wx2" id="pRl-eU-z7q"/>
                                             <outlet property="messageLabel" destination="pz3-6V-1b3" id="u5y-ol-lbz"/>
@@ -108,6 +109,7 @@
                                                 <constraint firstItem="LMP-lA-bA9" firstAttribute="top" secondItem="1Yq-ah-gqM" secondAttribute="top" constant="21" id="xuI-vF-3Yr"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemTealColor"/>
                                         <connections>
                                             <outlet property="authorLabel" destination="2Ts-cT-fmX" id="ceJ-ax-9fi"/>
                                             <outlet property="messageLabel" destination="LMP-lA-bA9" id="daf-Gp-f2v"/>
@@ -234,6 +236,12 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30BFEC4225D4520D00852C63 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFEC4125D4520D00852C63 /* UserDefaultsManager.swift */; };
 		30DE931D25C3518700F2833D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DE931C25C3518700F2833D /* AppDelegate.swift */; };
 		30DE931F25C3518700F2833D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DE931E25C3518700F2833D /* SceneDelegate.swift */; };
 		30DE932125C3518700F2833D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DE932025C3518700F2833D /* ViewController.swift */; };
@@ -19,7 +20,7 @@
 		30E37FA225C9C469000D00DB /* ChatMesageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E37FA125C9C469000D00DB /* ChatMesageCell.swift */; };
 		30E37FA725C9C60E000D00DB /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E37FA625C9C60E000D00DB /* ChatViewController.swift */; };
 		30E37FAC25C9C719000D00DB /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E37FAB25C9C719000D00DB /* ChatListViewController.swift */; };
-		30E37FBF25C9CD51000D00DB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E37FBE25C9CD51000D00DB /* User.swift */; };
+		30E37FBF25C9CD51000D00DB /* UserUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E37FBE25C9CD51000D00DB /* UserUtilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		30BFEC4125D4520D00852C63 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		30DE931925C3518700F2833D /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30DE931C25C3518700F2833D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30DE931E25C3518700F2833D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,7 +61,7 @@
 		30E37FA125C9C469000D00DB /* ChatMesageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMesageCell.swift; sourceTree = "<group>"; };
 		30E37FA625C9C60E000D00DB /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		30E37FAB25C9C719000D00DB /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
-		30E37FBE25C9CD51000D00DB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		30E37FBE25C9CD51000D00DB /* UserUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUtilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +120,8 @@
 				30E37FA125C9C469000D00DB /* ChatMesageCell.swift */,
 				30E37FA625C9C60E000D00DB /* ChatViewController.swift */,
 				30E37FAB25C9C719000D00DB /* ChatListViewController.swift */,
-				30E37FBE25C9CD51000D00DB /* User.swift */,
+				30E37FBE25C9CD51000D00DB /* UserUtilities.swift */,
+				30BFEC4125D4520D00852C63 /* UserDefaultsManager.swift */,
 				30DE932225C3518700F2833D /* Main.storyboard */,
 				30DE932525C3518900F2833D /* Assets.xcassets */,
 				30DE932725C3518900F2833D /* LaunchScreen.storyboard */,
@@ -279,7 +282,8 @@
 				30E37F9D25C9C230000D00DB /* ChatListCell.swift in Sources */,
 				30DE931D25C3518700F2833D /* AppDelegate.swift in Sources */,
 				30E37FA225C9C469000D00DB /* ChatMesageCell.swift in Sources */,
-				30E37FBF25C9CD51000D00DB /* User.swift in Sources */,
+				30E37FBF25C9CD51000D00DB /* UserUtilities.swift in Sources */,
+				30BFEC4225D4520D00852C63 /* UserDefaultsManager.swift in Sources */,
 				30E37FAC25C9C719000D00DB /* ChatListViewController.swift in Sources */,
 				30E37FA725C9C60E000D00DB /* ChatViewController.swift in Sources */,
 				30DE931F25C3518700F2833D /* SceneDelegate.swift in Sources */,

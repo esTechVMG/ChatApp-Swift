@@ -6,6 +6,13 @@
 //
 
 import Foundation
+func apnObjectToUserMessageObject(apn:ApnObject) -> UserMessage {
+    return UserMessage(author: apn.username, message: apn.aps.alert.body)
+}
+func apnObjectToUserObject(apn:ApnObject)-> User {
+    return User(name: apn.username, token: apn.token)
+}
+
 struct User : Codable{
     var name:String?
     var token:String
@@ -14,11 +21,27 @@ struct User : Codable{
         self.token = token
     }
 }
-struct UserList:Codable {
+class UserList:Codable {
     var users:[User]
     init() {
         users=Array()
     }
+}
+struct ApnObject:Codable {
+    var aps:aps
+    var username:String
+    var token:String
+}
+struct aps:Codable{
+    var alert:alert
+    var sound:String
+    var badge:Int
+    var link_url:String
+    var category:String
+}
+struct alert:Codable{
+    var title:String
+    var body:String
 }
 struct UserMessage:Codable {
     var author:String? = "UnknownUser"
@@ -35,8 +58,6 @@ struct  UserMessageList:Codable{
         messageList=Array()
     }
 }
-
-
 /*
  APNS Message
  {
@@ -55,25 +76,3 @@ struct  UserMessageList:Codable{
  }
 
  */
-struct ApnObject:Codable {
-    var aps:aps
-    var username:String
-    var token:String
-}
-struct aps:Codable{
-    var alert:alert
-    var sound:String
-    var badge:Int
-    var link_url:String
-    var category:String
-}
-struct alert:Codable{
-    var title:String
-    var body:String
-}
-func apnObjectToUserMessageObject(apn:ApnObject) -> UserMessage {
-    return UserMessage(author: apn.username, message: apn.aps.alert.body)
-}
-func apnObjectToUserObject(apn:ApnObject)-> User {
-    return User(name: apn.username, token: apn.token)
-}

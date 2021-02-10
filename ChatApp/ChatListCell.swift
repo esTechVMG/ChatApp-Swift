@@ -8,5 +8,6 @@
 import UIKit
 class ChatListCell : UITableViewCell{
     @IBOutlet weak var id: UILabel!
+    @IBOutlet weak var username: UILabel!
     
 }

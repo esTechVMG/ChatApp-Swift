@@ -89,7 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         default:
            print("Abierta la notificacion sin click")
         }
-        
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: userInfo as Dictionary, options: .prettyPrinted)
             let notification:ApnObject = try jsonDecoder.decode(ApnObject.self, from: jsonData)
@@ -103,7 +102,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }).isEmpty
             
             if isFound{
-                print("User Found. Storing Notification")
+                print("User Found")
+                for n in 0...userDefaultsManager.userList.users.count-1{
+                    if userDefaultsManager.userList.users[n].token == user.token{
+                        userDefaultsManager.userList.users[n].name = user.name
+                        userDefaultsManager.storeToChatList()
+                        break
+                    }
+                }
                 userDefaultsManager.readChatFromUserDefaults(user: user)
             }else{
                 print("User Not Found. Adding it")
@@ -111,9 +117,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 userDefaultsManager.storeToChatList()
                 userDefaultsManager.messageList = UserMessageList()
             }
+            print("Storing Notification")
             userDefaultsManager.messageList.messageList.append(message)
             userDefaultsManager.storeChatMessages(user: user)
-            
+            //let nc = NotificationCenter.default
+            //nc.post(name: Notification.Name("ChatListUpdated"), object: nil)
             
             
         } catch {

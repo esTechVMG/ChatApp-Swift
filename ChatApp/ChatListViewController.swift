@@ -13,11 +13,15 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         //Create if not exists
         tableView.delegate = self
         tableView.dataSource = self
+        let nc = NotificationCenter.default
+        //nc.addObserver(self, selector: #selector(userReopenedApp), name: Notification.Name("UserLoggedIn"), object: nil)
         
         
-        //userList.users.append(User(name: "Vicente", token: "fmgthgio5unbgiu58hgt"))
-        //userList.users.append(User(name: "Alberto", token: "ru4ohut549ij5it959iut"))
-        //userList.users.append(User(name: "Juan", token: "45j0fi6otj6imugou6ng059"))
+    }
+    func useReopenedApp() -> Void {
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
         userDefaultsManager.readChatListFromUserDefaults()
         tableView.reloadData()
     }
@@ -39,6 +43,7 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatItem", for: indexPath) as! ChatListCell
         let user:User = userDefaultsManager.userList.users[indexPath.row]
         cell.id.text = user.token
+        cell.username.text = user.name
         return cell
     }
     

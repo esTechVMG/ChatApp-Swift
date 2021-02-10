@@ -32,7 +32,6 @@ class UserDefaultsManager{
     }
     
     var messageList:UserMessageList=UserMessageList()
-    var chatUser:User?
     func storeChatMessages(user:User) {
         do {
             let data = try encoder.encode(messageList)

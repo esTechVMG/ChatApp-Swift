@@ -105,16 +105,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if isFound{
                 print("User Found. Storing Notification")
                 userDefaultsManager.readChatFromUserDefaults(user: user)
-                userDefaultsManager.messageList.messageList.append(message)
-                userDefaultsManager.storeChatMessages(user: user)
             }else{
                 print("User Not Found. Adding it")
                 userDefaultsManager.userList.users.append(user)
                 userDefaultsManager.storeToChatList()
                 userDefaultsManager.messageList = UserMessageList()
-                userDefaultsManager.messageList.messageList.append(message)
-                userDefaultsManager.storeChatMessages(user: user)
             }
+            userDefaultsManager.messageList.messageList.append(message)
+            userDefaultsManager.storeChatMessages(user: user)
             
             
             

@@ -64,11 +64,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     //Completed registering to APNS
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let tokenParts = deviceToken.map({data in String(format: "%02.2hh%", data)
-        })
-        let token = tokenParts.joined()
-        print("Device Token: \(token)")
-    }
+
+           let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+
+           let token = tokenParts.joined()
+
+           print("Device Token: \(token)")
+
+       }
     //Error while registering to APNS
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Fallo al registrar: \(error)")

@@ -14,14 +14,11 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         let nc = NotificationCenter.default
-        //nc.addObserver(self, selector: #selector(userReopenedApp), name: Notification.Name("UserLoggedIn"), object: nil)
-        
-        
+        nc.addObserver(self, selector: #selector(userReopenedApp), name: Notification.Name("UserLoggedIn"), object: nil)
+        userReopenedApp()
     }
-    func useReopenedApp() -> Void {
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
+    @objc func userReopenedApp() -> Void {
+        print("User has reopened the app!")
         userDefaultsManager.readChatListFromUserDefaults()
         tableView.reloadData()
     }

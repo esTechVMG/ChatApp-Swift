@@ -15,9 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.registerForPushNotifications()
-        
-        UIApplication.shared.applicationIconBadgeNumber = 0
-        
         let notificationOption = launchOptions?[.remoteNotification]
         
         
@@ -120,8 +117,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("Storing Notification")
             userDefaultsManager.messageList.messageList.append(message)
             userDefaultsManager.storeChatMessages(user: user)
-            //let nc = NotificationCenter.default
-            //nc.post(name: Notification.Name("ChatListUpdated"), object: nil)
+            let nc = NotificationCenter.default
+            nc.post(name: Notification.Name("ChatListUpdated"), object: nil)
             
             
         } catch {

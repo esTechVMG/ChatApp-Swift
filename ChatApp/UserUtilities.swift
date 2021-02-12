@@ -74,6 +74,7 @@ struct  UserMessageList:Codable{
  }
 
  */
+//NOTE: The PHP Script is included in the root of the repository
 let devUrl:String = "http://localhost/APNS/"
 let baseUrl:String = "https://test5.qastusoft.com.es/Vicente/APNS/"
 func sendMessageToServer(userToSend:User, message:UserMessage) -> Void {

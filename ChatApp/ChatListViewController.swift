@@ -15,7 +15,7 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(userReopenedApp), name: Notification.Name("UserLoggedIn"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(userReopenedApp), name: UIApplication.willEnterForegroundNotification, object: nil)
         self.userDefaultsManager.getUserProfile()
         usernameLabel.text = userDefaultsManager.mainUser.name
     }

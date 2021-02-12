@@ -77,9 +77,10 @@ struct  UserMessageList:Codable{
 //NOTE: The PHP Script is included in the root of the repository
 let devUrl:String = "http://localhost/APNS/"
 let baseUrl:String = "https://test5.qastusoft.com.es/Vicente/APNS/"
+let isProduction:Bool = false;//MARK: Change this in production!!
 func sendMessageToServer(userToSend:User, message:UserMessage) -> Void {
     let bodyData = "message=\(message.message)&username=\(userToSend.name ?? "UnknownUser")&token=\(userToSend.token)"
-    let Url = String(format: devUrl)
+    let Url = String(format: isProduction ? baseUrl : devUrl)
     print(userToSend)
     print(message)
     guard let serviceUrl = URL(string: Url) else { return }

@@ -111,7 +111,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             userDefaultsManager.messageList.messageList.append(message)
             userDefaultsManager.storeChatMessages(user: user)
             let nc = NotificationCenter.default
-            nc.post(name: Notification.Name("ChatListUpdated"), object: nil)
             
             var responseMessage:UserMessage?
             switch response.actionIdentifier {

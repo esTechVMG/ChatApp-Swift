@@ -51,7 +51,6 @@ class UserDefaultsManager{
             
         }
     }
-    
     var messageList:UserMessageList=UserMessageList()
     func storeChatMessages(user:User) {
         do {

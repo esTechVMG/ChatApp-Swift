@@ -11,8 +11,6 @@ class ChatViewController : UIViewController, UITableViewDelegate, UITableViewDat
             addMessage(message: UserMessage(author: "OtherPerson", message: "Hello"))
         }
     }
-    let devUrl:String = "http://localhost/APNS/"
-    let baseUrl:String = "https://test5.qastusoft.com.es/Vicente/APNS/"
     var user:User = User(name: "Unknown User", token: "jit6yji77noyhu6t")
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
@@ -58,24 +56,6 @@ class ChatViewController : UIViewController, UITableViewDelegate, UITableViewDat
         tableView.scrollToRow(at: index, at: .bottom, animated: true)
         userDefaultsManager.storeChatMessages(user: user)
         
-    }
-    func sendMessageToServer(userToSend:User, message:UserMessage) -> Void {
-        let bodyData = "message=\(message.message)&username=\(user.name ?? "UnknownUser")&token=\(userToSend.token)"
-        let Url = String(format: devUrl)
-        print(userToSend)
-        print(message)
-        guard let serviceUrl = URL(string: Url) else { return }
-        var request = URLRequest(url: serviceUrl)
-        request.httpMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded;charset=utf-8", forHTTPHeaderField: "Content-Type")
-        //print(bodyData)
-        request.httpBody = bodyData.data(using: String.Encoding.utf8);
-        //request.httpBody = httpBody
-        URLSession.shared.dataTask(with: request) { [self] (data, response, error) in
-            if let data = data {
-                print(String.init(data: data, encoding: .utf8) as Any)
-            }
-        }.resume()
     }
     
     

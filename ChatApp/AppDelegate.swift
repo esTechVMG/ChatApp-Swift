@@ -40,10 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("Permission Granted: \(granted)")
             guard granted else {return}
             //Acciones personalizadas
-            let acceptAction = UNNotificationAction(identifier: "ACCEPT_ACTION", title: "Aceptar", options: [.foreground])
-            let denyAction = UNNotificationAction(identifier: "DENY_ACTION", title: "Denegar", options: [.foreground])
+            let firstAction = UNNotificationAction(identifier: "FIXED_MESSAGE1_ACTION", title: "Estoy ocupado, luego hablamos", options: [.foreground])
+            let secondAction = UNNotificationAction(identifier: "FIXED_MESSAGE2_ACTION", title: "Hola, que tal?", options: [.foreground])
             //Tipo de notificaciones
-            let notifCategory = UNNotificationCategory(identifier: "TEST_PUSH", actions: [acceptAction,denyAction], intentIdentifiers: [], options: .customDismissAction)
+            let notifCategory = UNNotificationCategory(identifier: "TEST_PUSH", actions: [firstAction,secondAction], intentIdentifiers: [], options: .customDismissAction)
             
             let notificationCenter = UNUserNotificationCenter.current()
             notificationCenter.setNotificationCategories([notifCategory])
@@ -79,16 +79,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        switch response.actionIdentifier {
-        case "ACCEPT_ACTION":
-            print("El usuario ha aceptado")
-            break
-        case "DENY_ACTION":
-            print("El usuario ha denegado")
-            break
-        default:
-           print("Abierta la notificacion sin click")
-        }
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: userInfo as Dictionary, options: .prettyPrinted)
             let notification:ApnObject = try jsonDecoder.decode(ApnObject.self, from: jsonData)
@@ -123,6 +113,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let nc = NotificationCenter.default
             nc.post(name: Notification.Name("ChatListUpdated"), object: nil)
             
+            var responseMessage:UserMessage?
+            switch response.actionIdentifier {
+            case "FIXED_MESSAGE1_ACTION":
+                responseMessage = UserMessage(author: user.name, message: "Estoy ocupado, hablamos luego")
+                sendMessageToServer(userToSend: user, message: responseMessage!)
+                break
+            case "FIXED_MESSAGE2_ACTION":
+                responseMessage = UserMessage(author: user.name, message: "Hola, que tal?")
+                sendMessageToServer(userToSend: user, message: responseMessage!)
+                break
+            default:
+               print("Abierta la notificacion sin click")
+            }
+            guard let res = responseMessage else {return}
+            userDefaultsManager.readChatFromUserDefaults(user: user)
+            userDefaultsManager.messageList.messageList.append(res)
+            userDefaultsManager.storeChatMessages(user: user)
             
         } catch {
             print("Exception Found")

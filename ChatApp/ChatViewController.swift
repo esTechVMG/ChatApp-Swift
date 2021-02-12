@@ -25,6 +25,7 @@ class ChatViewController : UIViewController, UITableViewDelegate, UITableViewDat
         }else{
             userNameLabel.text = user.token
         }
+        userDefaultsManager.getUserProfile()
         
         tableView.reloadData()
         userDefaultsManager.readChatFromUserDefaults(user: user)
@@ -38,10 +39,11 @@ class ChatViewController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @IBAction func sendBtnPressed(_ sender: Any) {
-        if sendTextField.text != ""{
-            var message = UserMessage(author: "Me", message: sendTextField.text!)
+        if sendTextField.text != "" {
+            var message = UserMessage(author:userDefaultsManager.mainUser.name , message: sendTextField.text!)
             message.isMessageMine = true
             addMessage(message: message)
+            message.isMessageMine = false
             sendMessageToServer(userToSend: user, message: message)
         }
         sendTextField.text=""

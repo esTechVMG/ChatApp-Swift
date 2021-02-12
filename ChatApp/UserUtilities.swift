@@ -74,3 +74,23 @@ struct  UserMessageList:Codable{
  }
 
  */
+let devUrl:String = "http://localhost/APNS/"
+let baseUrl:String = "https://test5.qastusoft.com.es/Vicente/APNS/"
+func sendMessageToServer(userToSend:User, message:UserMessage) -> Void {
+    let bodyData = "message=\(message.message)&username=\(userToSend.name ?? "UnknownUser")&token=\(userToSend.token)"
+    let Url = String(format: devUrl)
+    print(userToSend)
+    print(message)
+    guard let serviceUrl = URL(string: Url) else { return }
+    var request = URLRequest(url: serviceUrl)
+    request.httpMethod = "POST"
+    request.setValue("application/x-www-form-urlencoded;charset=utf-8", forHTTPHeaderField: "Content-Type")
+    //print(bodyData)
+    request.httpBody = bodyData.data(using: String.Encoding.utf8);
+    //request.httpBody = httpBody
+    URLSession.shared.dataTask(with: request) {(data, response, error) in
+        if let data = data {
+            print(String.init(data: data, encoding: .utf8) as Any)
+        }
+    }.resume()
+}

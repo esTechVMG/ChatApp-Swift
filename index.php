@@ -49,15 +49,15 @@ class APSAlert implements \JsonSerializable{
     }
 }
 function isAllDataSent() : bool{
-    return (isset($_GET['message']) && isset($_GET['username']) && isset($_GET['token']) );
+    return (isset($_POST['message']) && isset($_POST['username']) && isset($_POST['token']) );
 }
 
 //INIT
 
 if(isAllDataSent()){
-    $deviceToken = $_GET['token']; // Token Device
-    $message = $_GET['message']; // Message to show the user
-    $username = $_GET['username']; // UserName to show the user
+    $deviceToken = $_POST['token']; // Token Device
+    $message = $_POST['message']; // Message to show the user
+    $username = $_POST['username']; // UserName to show the user
     //Object instantiation
     
     $alert = new APSAlert($message);

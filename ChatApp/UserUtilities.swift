@@ -63,13 +63,11 @@ struct  UserMessageList:Codable{
  {
      "aps":{
          "alert": {
-             "title": "Notificación recibida de la aplicacion push",
-             "body": "Acepta el nuevo evento para mas informacion"
+             "title": "Notification title",
+             "body": "Lorem ipsum dolor sit amet"
          },
          "sound": "default",
-         "badge": 3,
-         "link_url": "https://escuelaestech.es",
-         "category": "TEST_PUSH"
+         "category": "ESTECHVMG_CHAT"
      },
      "username": "Vicente"
      "token": "ej84uhfg58"

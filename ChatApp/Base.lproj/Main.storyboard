@@ -219,7 +219,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Mys-Jk-F9B">
-                        <barButtonItem key="leftBarButtonItem" title="Change Username" id="BCB-RL-KCA"/>
+                        <barButtonItem key="leftBarButtonItem" title="Change Username" id="BCB-RL-KCA">
+                            <connections>
+                                <action selector="changeNamePressed:" destination="4yd-5O-2ON" id="YEa-hp-soW"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="8r9-Yl-X4R">
                             <connections>
                                 <action selector="addButtonPressed:" destination="4yd-5O-2ON" id="9Sl-Lq-WyE"/>

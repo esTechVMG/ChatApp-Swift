@@ -8,6 +8,7 @@
 import UIKit
 class ChatListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var usernameLabel: UILabel!
     var userDefaultsManager:UserDefaultsManager = UserDefaultsManager()
     override func viewDidLoad() {
         //Create if not exists
@@ -15,7 +16,8 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(userReopenedApp), name: Notification.Name("UserLoggedIn"), object: nil)
-        userReopenedApp()
+        self.userDefaultsManager.getUserProfile()
+        usernameLabel.text = userDefaultsManager.mainUser.name
     }
     @objc func userReopenedApp() -> Void {
         print("User has reopened the app!")
@@ -48,21 +50,34 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
     
     func numberOfSections(in tableView: UITableView) -> Int {return 1}
     
+    @IBAction func changeNamePressed(_ sender: Any) {
+        alertWithPlaceholder(placeholder: "Insert new Username", handler: {(output:String)-> Void in
+            self.userDefaultsManager.getUserProfile()
+            self.userDefaultsManager.mainUser.name=output
+            self.userDefaultsManager.storeUserProfile()
+            self.usernameLabel.text = output
+        })
+    }
     @IBAction func addButtonPressed(_ sender: Any) {
-        let alertController = UIAlertController(title: "Insert Token", message: nil, preferredStyle: .alert)
+        alertWithPlaceholder(placeholder: "Insert Token", handler: {(output:String) -> Void in
+            self.userDefaultsManager.userList.users.append(User(name: nil, token: output))
+            self.tableView.reloadData()
+            self.userDefaultsManager.storeToChatList()
+        })
+    }
+    func alertWithPlaceholder(placeholder:String,handler:@escaping (_ output:String) -> Void) -> Void {
+        let alertController = UIAlertController(title: placeholder, message: nil, preferredStyle: .alert)
         alertController.addTextField { (textField : UITextField) -> Void in
-            textField.placeholder = "Token"
+            textField.placeholder = placeholder
                 }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { ( result : UIAlertAction) -> Void in
             print("Cancel")
                 }
         let okAction = UIAlertAction(title: "OK", style: .default) { (result : UIAlertAction) -> Void in
             if let token:String = alertController.textFields?.first?.text{
                 print(token)
                 if token != ""{
-                    self.userDefaultsManager.userList.users.append(User(name: nil, token: token))
-                    self.tableView.reloadData()
-                    self.userDefaultsManager.storeToChatList()
+                    handler(token)
                 }else{
                     let alertController2 = UIAlertController(title: "Error", message: "No ha introducido nada", preferredStyle: .alert)
                     let okAlertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -70,7 +85,6 @@ class ChatListViewController : UIViewController, UITableViewDelegate, UITableVie
                     self.present(alertController2, animated: true, completion: nil)
                 }
             }else{
-                
             }
         }
         alertController.addAction(okAction)

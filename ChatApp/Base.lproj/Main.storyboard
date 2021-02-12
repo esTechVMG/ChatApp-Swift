@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9aj-vL-Dg4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -161,7 +162,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QFk-IS-fVY">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="128.5" width="414" height="733.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatItem" rowHeight="103" id="U0U-TC-Wlz" customClass="ChatListCell" customModule="ChatApp" customModuleProvider="target">
@@ -199,17 +200,26 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkg-ZQ-cY0">
+                                <rect key="frame" x="186" y="98" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FI6-mH-olC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="FI6-mH-olC" firstAttribute="bottom" secondItem="QFk-IS-fVY" secondAttribute="bottom" id="7w5-T2-fAU"/>
                             <constraint firstItem="QFk-IS-fVY" firstAttribute="leading" secondItem="FI6-mH-olC" secondAttribute="leading" id="9Bh-nh-LZi"/>
+                            <constraint firstItem="QFk-IS-fVY" firstAttribute="top" secondItem="kkg-ZQ-cY0" secondAttribute="bottom" constant="10" id="G4c-If-8oQ"/>
+                            <constraint firstItem="kkg-ZQ-cY0" firstAttribute="centerX" secondItem="oE5-7O-pbY" secondAttribute="centerX" id="c7g-zp-M4E"/>
                             <constraint firstItem="FI6-mH-olC" firstAttribute="trailing" secondItem="QFk-IS-fVY" secondAttribute="trailing" id="jsR-Ke-fgx"/>
-                            <constraint firstItem="QFk-IS-fVY" firstAttribute="top" secondItem="FI6-mH-olC" secondAttribute="top" id="mv1-tM-Y2B"/>
+                            <constraint firstItem="kkg-ZQ-cY0" firstAttribute="top" secondItem="FI6-mH-olC" secondAttribute="top" constant="10" id="sCj-5I-Bpi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Mys-Jk-F9B">
+                        <barButtonItem key="leftBarButtonItem" title="Change Username" id="BCB-RL-KCA"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="8r9-Yl-X4R">
                             <connections>
                                 <action selector="addButtonPressed:" destination="4yd-5O-2ON" id="9Sl-Lq-WyE"/>
@@ -218,6 +228,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="QFk-IS-fVY" id="tKE-sQ-GM8"/>
+                        <outlet property="usernameLabel" destination="kkg-ZQ-cY0" id="lOY-CK-wcv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DoU-ba-LdG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

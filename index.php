@@ -49,20 +49,25 @@ class APSAlert implements \JsonSerializable{
     }
 }
 function isAllDataSent() : bool{
-    return (isset($_POST['message']) && isset($_POST['username']) && isset($_POST['token']) );
+    echo $_POST['token'] ?? "Sender Token is not set <br>" ; // Sender Device Token
+    echo $_POST['receiverToken'] ?? "Receiver Token is not set <br>"; //Receiver Token Device
+    echo $_POST['message'] ?? "Message is not set <br>"; // Message to show the user
+    echo $_POST['username'] ?? "Username is not set <br>"; // UserName to show the user
+    return isset($_POST['message']) && isset($_POST['username']) && isset($_POST['token']) && isset($_POST['receiverToken']);
 }
 
 //INIT
 
 if(isAllDataSent()){
-    $deviceToken = $_POST['token']; // Token Device
+    $senderToken = $_POST['token']; // Sender Device Token
+    $receiverToken = $_POST['receiverToken']; //Receiver Token Device
     $message = $_POST['message']; // Message to show the user
     $username = $_POST['username']; // UserName to show the user
     //Object instantiation
     
     $alert = new APSAlert($message);
     $aps = new APSObject($alert);
-    $alertObject= new APN($aps,$username,$deviceToken);
+    $alertObject= new APN($aps,$username,$senderToken);
     $alertJson = json_encode($alertObject);
     echo $alertJson .'<br>';
 
@@ -74,7 +79,7 @@ if(isAllDataSent()){
     //URL producción
 	// $url = "https://api.push.apple.com/3/device/$deviceToken";
     //URL testing
- 	$url = "https://api.development.push.apple.com/3/device/$deviceToken";
+ 	$url = "https://api.development.push.apple.com/3/device/$receiverToken";
     // OPEN CONNECTION TO APNS SERVER :
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
@@ -88,9 +93,6 @@ if(isAllDataSent()){
     $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     var_dump($response);
     var_dump($httpcode);
-}else{
-    
-    echo 'Not All Data was sent';
 }
 
 //JSON SCHEME

@@ -30,7 +30,7 @@ class UserDefaultsManager{
             
         }
     }
-    var mainUser:User = User(name: "Anonymous User", token: "000000000000000")
+    var mainUser:User = User(name: "Anonymous User", token: "3a840fd4a7ea804719c17266e036f2e9879d2b704addbd84eec8ddefc9d6e44d")
     func getUserProfile() -> Void {
         do {
             let data = defaults.data(forKey: "UserProfile")
